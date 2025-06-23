@@ -1,4 +1,0 @@
-species_name,scientific_name,category,habitat,location,biology,population,fishing_rate,image_url,health_benefits,management,availability,nutrition,texture,taste
-Tilapia,Oreochromis niloticus,Actinopterygii,Freshwater lakes and rivers,Africa,Farm-raised for protein,Widely farmed,Moderate,https://example.com/tilapia.jpg,Rich in protein,Sustainable practices,High,High quality,Soft,Mild
-Salmon,Salmo salar,Actinopterygii,Cold oceans and rivers,Northern Atlantic,Important in omega-3 diet,Moderate,High,https://example.com/salmon.jpg,Rich in omega-3,Monitored stocks,Moderate,Excellent,Firm,Rich
-Catfish,Clarias gariepinus,Actinopterygii,Muddy rivers and swamps,East Africa,Popular in local diets,Stable,Low,https://example.com/catfish.jpg,Boosts immune system,Managed aquaculture,Available,Good,Meaty,Earthy
