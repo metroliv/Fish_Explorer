@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ fish.species_name }} | Fish Details{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<style>
+  .fish-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    margin-bottom: 3rem;
+  }
+
+  .fish-card img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-title {
+    color: #0077b6;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .detail-label {
+    font-weight: 600;
+    color: #023e8a;
+  }
+
+  .detail-section {
+    margin-bottom: 1rem;
+  }
+
+  .btn-guide {
+    background: #0077b6;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .btn-guide:hover {
+    background: #005f99;
+  }
+</style>
+
+<div class="container" data-aos="fade-up">
+  <div class="fish-card">
+    <h1 class="detail-title">{{ fish.species_name }}</h1>
+    
+    {% if fish.image_file %}
+      <img src="{{ fish.image_file.url }}" alt="{{ fish.species_name }}">
+    {% elif fish.image_url %}
+      <img src="{{ fish.image_url }}" alt="{{ fish.species_name }}">
+    {% else %}
+      <img src="https://via.placeholder.com/600x300?text=No+Image" alt="No Image">
+    {% endif %}
+
+    <div class="detail-section">
+      <p><span class="detail-label">Scientific Name:</span> {{ fish.scientific_name|default:"N/A" }}</p>
+      <p><span class="detail-label">Category:</span> {{ fish.category|default:"Not classified" }}</p>
+      <p><span class="detail-label">Habitat:</span> {{ fish.habitat|default:"Not specified" }}</p>
+      <p><span class="detail-label">Location:</span> {{ fish.location|default:"Not specified" }}</p>
+      <p><span class="detail-label">Biology:</span> {{ fish.biology|default:"No biology data available." }}</p>
+      <p><span class="detail-label">Population:</span> {{ fish.population|default:"Unknown" }}</p>
+      <p><span class="detail-label">Fishing Rate:</span> {{ fish.fishing_rate|default:"Not available" }}</p>
+      <p><span class="detail-label">Health Benefits:</span> {{ fish.health_benefits|default:"None listed" }}</p>
+      <p><span class="detail-label">Texture:</span> {{ fish.texture|default:"Not described" }}</p>
+      <p><span class="detail-label">Taste:</span> {{ fish.taste|default:"Not described" }}</p>
+      <p><span class="detail-label">Availability:</span> {{ fish.availability|default:"Seasonal/Unknown" }}</p>
+      <p><span class="detail-label">Management Info:</span> {{ fish.management|default:"Not available" }}</p>
+      <p><span class="detail-label">Nutrition:</span> {{ fish.nutrition|default:"Nutritional data not available." }}</p>
+    </div>
+
+    <div class="mt-4 text-center">
+      <a class="btn-guide" href="{% url 'fish_keeping_guide' %}">📘 Fish Keeping & Cooking Guide</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init();</script>
+{% endblock %}

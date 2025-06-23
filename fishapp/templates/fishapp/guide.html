@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fish Keeping & Preparation Guide{% endblock %}
+
+{% block content %}
+<!-- Animate On Scroll CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<style>
+  .guide-header {
+    background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1598970434795-0c54fe7c0642?auto=format&fit=crop&w=1500&q=80') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-weight: 700;
+    color: #0077b6;
+    margin-top: 2rem;
+  }
+
+ 
+  .tip-card {
+    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 6px 18px rgba(0, 119, 182, 0.12);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+
+  .tip-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 119, 182, 0.2);
+  }
+
+  .tip-icon {
+    font-size: 2.5rem;
+    color: #00b4d8;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .tip-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .tip-card .section-title {
+    font-size: 1.4rem;
+    color: #023e8a;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .tip-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .tip-card {
+      padding: 1.5rem;
+    }
+
+    .tip-card img {
+      height: 180px;
+    }
+
+    .tip-card .section-title {
+      font-size: 1.2rem;
+    }
+
+    .tip-icon {
+      font-size: 2rem;
+    }
+  }
+
+
+
+  .go-back {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .go-back a {
+    background: #0077b6;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .go-back a:hover {
+    background: #005f99;
+  }
+
+  .info-section {
+    margin-top: 3rem;
+  }
+
+  .info-section img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .db-card {
+    background: #fefefe;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .db-card h5 {
+    color: #0077b6;
+    font-weight: 600;
+  }
+</style>
+
+<div class="guide-header" data-aos="fade-down">
+  <h1>🐟 Fish Keeping & Cooking Guide</h1>
+  <p class="lead">Learn how to care for your fish and prepare them as food from nature to plate.</p>
+</div>
+
+<div class="row">
+  <div class="col-md-6" data-aos="fade-up">
+    <div class="tip-card">
+      <div class="tip-icon">💧</div>
+      <img src="https://media.istockphoto.com/id/1496606493/photo/pool-tester-test-kit-in-girl-hand-over-water-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=3QUrMMpkn7PHnRNC8sB8UGfJRiglXONb0ANfGiqK9UM=">
+      <h4 class="section-title">1. Water Quality</h4>
+      <p>Keep water clean and balanced. Check pH, ammonia, and nitrates weekly. Use conditioners to remove chlorine and toxins.</p>
+    </div>
+  </div>
+    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+    <div class="tip-card">
+      <div class="tip-icon">🐠</div>
+      <img src="https://media.istockphoto.com/id/1445588907/photo/fish-2.webp?a=1&b=1&s=612x612&w=0&k=20&c=UX6ysTpeRMnJVC3qZnbiK6L-TXeuNItcvK_M_OhYMbQ=">
+      <h4 class="section-title">2. Fish Compatibility</h4>
+      <p>Only mix species that are peaceful together. Research their behavior and avoid predators with peaceful breeds.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 🔵 Fish Pods (from DB) -->
+<div class="info-section" data-aos="fade-up">
+  <h2 class="section-title">🏞️ Popular Fish Pods</h2>
+  <div class="row">
+    {% for pod in pods %}
+      <div class="col-md-6 col-lg-4">
+        <div class="db-card" data-aos="fade-up">
+          {% if pod.image %}
+            <img src="{{ pod.image.url }}" alt="{{ pod.name }}">
+          {% else %}
+            <img src="https://via.placeholder.com/600x300?text=Fish+Pod" alt="No Image">
+          {% endif %}
+          <h5>{{ pod.name }}</h5>
+          <p>{{ pod.description|truncatewords:25 }}</p>
+        </div>
+      </div>
+    {% empty %}
+      <p>No fish pod data found.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- 🔴 Preparation Methods (from DB) -->
+<div class="info-section" data-aos="fade-up">
+  <h2 class="section-title">🔥 Popular Fish Preparations</h2>
+  <div class="row">
+    {% for prep in preparations %}
+      <div class="col-md-6 col-lg-4">
+        <div class="db-card" data-aos="fade-up">
+          {% if prep.image %}
+            <img src="{{ prep.image.url }}" alt="{{ prep.title }}">
+          {% else %}
+            <img src="https://via.placeholder.com/600x300?text=Fish+Preparation" alt="No Image">
+          {% endif %}
+          <h5>{{ prep.title }}</h5>
+          <p>{{ prep.description|truncatewords:25 }}</p>
+        </div>
+      </div>
+    {% empty %}
+      <p>No preparation info found.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- 🟠 Extra Info -->
+<div class="info-section" data-aos="fade-up">
+  <h2 class="section-title">📚 Learn More</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Fish_farming" target="_blank">Fish Farming (Wikipedia)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Fish_as_food" target="_blank">Fish as Food (Wikipedia)</a></li>
+  </ul>
+</div>
+
+<!-- 🔙 Back Button -->
+<div class="go-back">
+  <a href="{% url 'fish_list' %}">← Back to Fish List</a>
+</div>
+
+<!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init();</script>
+{% endblock %}

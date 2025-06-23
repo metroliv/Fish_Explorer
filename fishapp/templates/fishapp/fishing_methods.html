@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fishing Methods{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<style>
+  .intro-header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(to right, #0077b6cc, #0096c7cc),
+                url('https://images.unsplash.com/photo-1523816204886-d3ec1fdefb1c?auto=format&fit=crop&w=1500&q=80') no-repeat center center;
+    background-size: cover;
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .method-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+    height: 100%;
+  }
+
+  .method-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .method-card img {
+    width: 100%;
+    border-radius: 10px;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .method-card h4 {
+    color: #0077b6;
+    font-weight: 700;
+    margin-top: 0.5rem;
+  }
+
+  .method-card .tag {
+    font-size: 0.85rem;
+    background-color: #00b4d8;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 8px;
+  }
+
+  .method-card .badge {
+    background-color: #023e8a;
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .method-card p {
+    font-size: 0.95rem;
+    color: #444;
+  }
+</style>
+
+<div class="intro-header" data-aos="fade-down">
+  <h1>🎣 Fishing Methods</h1>
+  <p class="lead">Explore various traditional and modern techniques used for fishing across the world.</p>
+</div>
+
+<div class="row">
+  {% for method in methods %}
+  <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+    <div class="method-card">
+      {% if method.image %}
+        <img src="{{ method.image.url }}" alt="{{ method.name }}">
+      {% else %}
+        <img src="https://via.placeholder.com/600x300?text=Fishing+Method" alt="No Image">
+      {% endif %}
+
+      <h4>{{ method.name }}</h4>
+
+      <p>{{ method.description|truncatewords:25 }}</p>
+
+      {% if method.tools_required %}
+        <p><strong>🛠️ Tools:</strong> {{ method.tools_required }}</p>
+      {% endif %}
+
+      <p>
+        <strong>🧭 Type:</strong>
+        {% if method.is_traditional %}
+          <span class="badge">Traditional</span>
+        {% else %}
+          <span class="badge">Modern</span>
+        {% endif %}
+      </p>
+
+      {% if method.recommended_species.exists %}
+        <p><strong>🐟 Recommended Species:</strong><br>
+        {% for fish in method.recommended_species.all %}
+          <span class="tag">{{ fish.species_name }}</span>
+        {% endfor %}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+    <p class="text-muted text-center">No fishing methods available at the moment.</p>
+  {% endfor %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init();</script>
+{% endblock %}

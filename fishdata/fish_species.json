@@ -1,0 +1,40 @@
+[
+  {
+    "Species Name": "Atlantic Mackerel",
+    "Scientific Name": "Scomber scombrus",
+    "Habitat": "Open ocean and coastal waters of the North Atlantic",
+    "Location": "Northwest Atlantic Ocean",
+    "Biology": "Atlantic mackerel are fast swimmers and feed on small fish and crustaceans.",
+    "Population": "Above target population levels.",
+    "Fishing Rate": "At recommended sustainable levels.",
+    "Health Benefits": "Rich in omega-3 fatty acids.",
+    "Management": "Managed by NOAA Fisheries and the Mid-Atlantic Fishery Management Council.",
+    "Availability": "Available year-round, peak in summer.",
+    "Nutrition": "High in protein, vitamin D, and selenium.",
+    "Texture": "Firm",
+    "Taste": "Rich, oily flavor",
+    "Species Illustration Photo": {
+      "src": "https://www.fishwatch.gov/sites/default/files/atlantic-mackerel.png",
+      "alt": "Atlantic Mackerel"
+    }
+  },
+  {
+    "Species Name": "Pacific Halibut",
+    "Scientific Name": "Hippoglossus stenolepis",
+    "Habitat": "Deep waters near the continental shelf.",
+    "Location": "North Pacific Ocean",
+    "Biology": "Largest flatfish, lives near the seafloor.",
+    "Population": "Sustainably managed and responsibly harvested.",
+    "Fishing Rate": "Controlled by international agreement.",
+    "Health Benefits": "Low in saturated fat, rich in magnesium.",
+    "Management": "Managed under the Halibut Treaty between U.S. and Canada.",
+    "Availability": "Available fresh March through November.",
+    "Nutrition": "Good source of high-quality protein.",
+    "Texture": "Firm and flaky",
+    "Taste": "Mild and slightly sweet",
+    "Species Illustration Photo": {
+      "src": "https://www.fishwatch.gov/sites/default/files/pacific-halibut.png",
+      "alt": "Pacific Halibut"
+    }
+  }
+]

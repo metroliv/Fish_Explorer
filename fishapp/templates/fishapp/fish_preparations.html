@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fish Preparations{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<style>
+  .prep-header {
+    background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1572441710263-352a01d68705?auto=format&fit=crop&w=1500&q=80') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .prep-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .prep-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .prep-card img {
+    width: 100%;
+    max-height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .prep-card h4 {
+    font-weight: 600;
+    color: #0077b6;
+  }
+
+  .prep-section-title {
+    font-weight: bold;
+    color: #333;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .badge {
+    background-color: #0077b6;
+    color: white;
+    margin-right: 4px;
+  }
+
+  .scrolling-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    scroll-behavior: smooth;
+  }
+
+  .scrolling-wrapper::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .scrolling-wrapper::-webkit-scrollbar-thumb {
+    background: #0077b6;
+    border-radius: 10px;
+  }
+
+  .prep-item {
+    flex: 0 0 auto;
+    width: 220px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 0.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .prep-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+
+  .prep-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .prep-item small {
+    display: block;
+    font-weight: 600;
+    color: #0077b6;
+  }
+</style>
+
+
+<div class="prep-header text-center" data-aos="fade-down">
+  <h1>🍽️ Fish Preparation Techniques</h1>
+  <p class="lead">Discover delicious ways to cook and enjoy your fish — grilled, baked, fried, steamed, curried, and more!</p>
+
+
+  <!-- Horizontal scrollable container -->
+  <div id="auto-scroll-slider" class="scrolling-wrapper mt-4 py-2">
+
+    <div class="prep-item">
+      <img src="https://media.istockphoto.com/id/670476232/photo/fresh-grilled-red-snapper-fish.webp?a=1&b=1&s=612x612&w=0&k=20&c=0UA6w_zMEoKWpKYXOTXyrbbmrqZ6cqZOPjBiCHQADqM=" alt="Grilled Fish">
+      <small>🔥 Grilled Fish</small>
+    </div>
+    <div class="prep-item">
+      <img src="https://media.istockphoto.com/id/1826839810/photo/fried-chicken-street-food.webp?a=1&b=1&s=612x612&w=0&k=20&c=piMHi-aYKj6OWmej3p90Pi1yJJD2UBwIgm4Zj-5pUbc=" alt="Fried Fish">
+      <small>🍳 Fried Delight</small>
+    </div>
+    <div class="prep-item">
+      <img src="https://media.istockphoto.com/id/2172100065/photo/crawfish-etouffee-served.webp?a=1&b=1&s=612x612&w=0&k=20&c=TPb9yx9YVrJu6QEFZFSqLX4Hko0rXCH4iHOEvG0y_Ss=" alt="Steamed Fish">
+      <small>💨 Steamed Flavors</small>
+    </div>
+    <div class="prep-item">
+      <img src="https://media.istockphoto.com/id/2167252126/photo/oven-baked-sea-bass-and-broccolini.webp?a=1&b=1&s=612x612&w=0&k=20&c=xuOsJNWtpqOY8Jif7jEjNSQek1ZYpIk6QBKFxycjQ64=" alt="Baked Fish">
+      <small>🔥 Oven Baked</small>
+    </div>
+    <div class="prep-item">
+      <img src="https://media.istockphoto.com/id/2043767125/photo/lemon-being-squeezed-over-shrimp-tandoori.webp?a=1&b=1&s=612x612&w=0&k=20&c=PY22LRPcA6rgfLXIA_2m7PoI_aYtHOB-FyM5DIXEtJQ=" alt="Fish Curry">
+      <small>🌶️ Fish Curry</small>
+    </div>
+  
+    <div class="prep-item">
+  <img src="https://stordfkenticomedia.blob.core.windows.net/df-us/rms/media/recipesmedia/recipes/retail/desktopimages/2017/jun/2017-grilledfishgrilledlemons-20217-desktop.jpg?ext=.jpg" alt="Grilled Fish">
+  <small>🔥 Grilled Snapper</small>
+</div>
+<div class="prep-item">
+  <img src="https://images.unsplash.com/photo-1673432512498-9e1aed6cbd29?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fENyaXNweSUyMEZyaWVkJTIwZmlzaHxlbnwwfHwwfHx8MA%3D%3D" alt="Fried Fish">
+  <small>🍳 Crispy Fried</small>
+</div>
+<div class="prep-item">
+  <img src="https://images.unsplash.com/photo-1602022131768-033a8796e78d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8U3RlYW1lZCUyMERlbGlnaHQlMjBmaXNofGVufDB8fDB8fHww" alt="Steamed Fish">
+  <small>💨 Steamed Delight</small>
+</div>
+<div class="prep-item">
+  <img src="https://media.istockphoto.com/id/174845969/photo/baked-sea-bass.webp?a=1&b=1&s=612x612&w=0&k=20&c=D5QIbDMyK_D3aQ-W0ZMc5yPKnvKaAwBJI7l8a3jILyc=" alt="Baked Fish">
+  <small>🔥 Baked Sea Bass</small>
+</div>
+<div class="prep-item">
+  <img src="https://plus.unsplash.com/premium_photo-1723708871094-2c02cf5f5394?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8VGFuZG9vcmklMjBDdXJyeXxlbnwwfHwwfHx8MA%3D%3D" alt="Fish Curry">
+  <small>🌶️ Tandoori Curry</small>
+</div>
+<div class="prep-item">
+  <img src="https://media.istockphoto.com/id/2181746242/photo/peruvian-seafood-gourmet-dish-as-an-appetiser-known-as-ceviche-or-seviche.webp?a=1&b=1&s=612x612&w=0&k=20&c=xvETQsnK41u-ndNHeuDqF3B-j3tKuf71jETlb_73G_w=" alt="Fish Ceviche">
+  <small>🍋 Ceviche Zest</small>
+</div>
+<div class="prep-item">
+  <img src="https://plus.unsplash.com/premium_photo-1672976349009-918d041258aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8RmlzaCUyMFRhY29zfGVufDB8fDB8fHww" alt="Fish Tacos">
+  <small>🌮 Fish Tacos</small>
+</div>
+<div class="prep-item">
+  <img src="https://media.istockphoto.com/id/482121467/photo/indian-thali-with-fish.webp?a=1&b=1&s=612x612&w=0&k=20&c=bVVg4qB4o93B6usklCy_Ch2SVDjZB7BsGk0QeZarL5Q=" alt="Indian Fish Curry">
+  <small>🍛 Indian Curry</small>
+</div>
+<div class="prep-item">
+  <img src="https://media.istockphoto.com/id/1397370987/photo/grilled-mackerel-fish-with-the-addition-of-herbs-and-lemon-slices-on-the-grill.webp?a=1&b=1&s=612x612&w=0&k=20&c=7Bf3kN9XuIz8IWmNKBB9rIWw_ls74jzJX3Zc4pwF61w=" alt="Grilled Mackerel">
+  <small>🔥 Grilled Mackerel</small>
+</div>
+<div class="prep-item">
+  <img src="https://images.unsplash.com/photo-1616557938378-1128a35743a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RmlzaCUyMFNvdXB8ZW58MHx8MHx8fDA%3D" alt="Fish Soup">
+  <small>🥣 Fish Soup</small>
+</div>
+
+  </div>
+</div>
+
+
+
+
+<div class="row">
+  {% for prep in preparations %}
+  <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+    <div class="prep-card">
+      {% if prep.image %}
+        <img src="{{ prep.image.url }}" alt="{{ prep.name }}">
+      {% else %}
+        <img src="https://via.placeholder.com/600x300?text=Preparation" alt="Preparation">
+      {% endif %}
+      <h4>{{ prep.name }}</h4>
+      
+      <p class="prep-section-title">🧂 Ingredients:</p>
+      <p>{{ prep.ingredients|linebreaks }}</p>
+
+      <p class="prep-section-title">📝 Steps:</p>
+      <p>{{ prep.steps|linebreaks }}</p>
+
+      <p class="prep-section-title">📖 Method:</p>
+      <p>{{ prep.method|linebreaks }}</p>
+
+      {% if prep.suitable_species.exists %}
+        <p class="prep-section-title">🐟 Suitable Species:</p>
+        {% for fish in prep.suitable_species.all %}
+          <span class="badge rounded-pill">{{ fish.species_name }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+    <p>No preparation methods available at this time.</p>
+  {% endfor %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+  AOS.init();
+
+  // Auto horizontal scroll effect
+  const scrollContainer = document.getElementById("auto-scroll-slider");
+  let scrollAmount = 0;
+  let scrollStep = 1; // Change this for faster/slower speed
+
+  function autoScroll() {
+    if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+      scrollAmount = 0;
+      scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      scrollAmount += scrollStep;
+      scrollContainer.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }
+
+  let scrollInterval = setInterval(autoScroll, 30); // Lower = faster scroll
+  scrollContainer.addEventListener('mouseenter', () => clearInterval(scrollInterval));
+scrollContainer.addEventListener('mouseleave', () => {
+  scrollInterval = setInterval(autoScroll, 30);
+});
+
+</script>
+
+{% endblock %}

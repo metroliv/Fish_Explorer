@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Animate On Scroll Library -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-image: url("https://images.unsplash.com/photo-1607435096985-2f60d8d1ba0e");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .overlay {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 2rem;
+    min-height: 100vh;
+  }
+
+  .header-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .header-carousel img {
+    height: 120px;
+    border-radius: 10px;
+    scroll-snap-align: center;
+    animation: float 4s ease-in-out infinite;
+    transition: transform 0.3s;
+  }
+
+  .header-carousel img:hover {
+    transform: scale(1.1);
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .search-bar {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .search-bar input {
+    padding: 0.7rem 1.2rem;
+    border-radius: 30px;
+    border: 1px solid #999;
+    width: 300px;
+    max-width: 90%;
+  }
+
+  .fish-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .fish-card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .fish-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .fish-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .fish-card h3 {
+    margin: 0.8rem 0 0.3rem;
+  }
+
+  .fish-card .scientific {
+    color: #666;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  .pagination {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .pagination .step-links a {
+    margin: 0 6px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+  }
+
+  .pagination .current {
+    padding: 6px 14px;
+    background: #333;
+    color: #fff;
+    border-radius: 6px;
+  }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 80px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    animation: zoom 0.3s;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+  }
+
+  @keyframes zoom {
+    from { transform: scale(0.7); }
+    to { transform: scale(1); }
+  }
+</style>
+
+<div class="overlay">
+  <div class="container">
+
+    <h1 class="text-center mb-4" data-aos="fade-down">🐟 Explore Fish Species</h1>
+
+    <!-- Moving fish banner -->
+   <div id="auto-fish-scroll" class="header-carousel">
+
+      {% for f in fish|slice:":20" %}
+        <img src="{{ f.image_url }}" alt="{{ f.species_name }}">
+      {% endfor %}
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar" data-aos="fade-up">
+      <input type="text" id="searchInput" placeholder="Search fish by name...">
+    </div>
+
+    <!-- Grid of Fish -->
+    <div class="fish-grid" id="fishGrid">
+      {% for f in fish %}
+        <a href="{% url 'fish_detail' f.pk %}">
+          <div class="fish-card" data-name="{{ f.species_name|lower }}" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:"1"|add:"00" }}">
+            <img src="{{ f.image_url }}" alt="{{ f.species_name }}" onclick="openModal(this.src)">
+            <h3>{{ f.species_name }}</h3>
+            <div class="scientific">{{ f.scientific_name }}</div>
+            <div class="habitat"><strong>Habitat:</strong> {{ f.habitat|default:"Unknown" }}</div>
+          </div>
+        </a>
+      {% empty %}
+        <p>No fish found.</p>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" data-aos="fade-up" data-aos-delay="300">
+      <span class="step-links">
+        {% if fish.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ fish.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+          Page {{ fish.number }} of {{ fish.paginator.num_pages }}
+        </span>
+
+        {% if fish.has_next %}
+          <a href="?page={{ fish.next_page_number }}">next</a>
+          <a href="?page={{ fish.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal for Image Preview -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+  <span class="modal-close">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<!-- AOS Animation Script -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  const searchInput = document.getElementById('searchInput');
+  const fishCards = document.querySelectorAll('.fish-card');
+
+  searchInput.addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    fishCards.forEach(card => {
+      const name = card.getAttribute('data-name');
+      card.style.display = name.includes(filter) ? 'block' : 'none';
+    });
+  });
+
+  function openModal(src) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    modal.style.display = "block";
+    modalImg.src = src;
+  }
+
+  function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+  }
+
+  document.querySelector(".modal-close").addEventListener("click", closeModal);
+
+  // Auto scroll fish header carousel
+const fishScroll = document.getElementById("auto-fish-scroll");
+let scrollX = 0;
+const scrollSpeed = 1; // lower = slower
+
+function autoScrollFish() {
+  if (fishScroll.scrollLeft >= fishScroll.scrollWidth - fishScroll.clientWidth) {
+    fishScroll.scrollTo({ left: 0, behavior: 'smooth' });
+    scrollX = 0;
+  } else {
+    scrollX += scrollSpeed;
+    fishScroll.scrollTo({ left: scrollX, behavior: 'smooth' });
+  }
+}
+
+let fishScrollInterval = setInterval(autoScrollFish, 30); // adjust for speed
+
+// Optional: pause scroll on hover
+fishScroll.addEventListener('mouseenter', () => clearInterval(fishScrollInterval));
+fishScroll.addEventListener('mouseleave', () => {
+  fishScrollInterval = setInterval(autoScrollFish, 30);
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fish Pods & Environments{% endblock %}
+
+{% block content %}
+<!-- Animate On Scroll CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<style>
+  .pods-header {
+    background: linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1560185127-6ed189bf03b6?auto=format&fit=crop&w=1500&q=80') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .pod-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .pod-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .pod-card img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .pod-card h4 {
+    color: #0077b6;
+    font-weight: 600;
+  }
+
+  .no-data {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    color: #555;
+  }
+</style>
+
+<div class="pods-header" data-aos="fade-down">
+  <h1>🏞️ Fish Pods & Housing</h1>
+  <p class="lead">Explore different fish housing setups—from aquariums to outdoor tanks and bio pods.</p>
+</div>
+
+<div class="row">
+  {% if pods %}
+    {% for pod in pods %}
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:"1" }}00">
+        <div class="pod-card">
+          {% if pod.image %}
+            <img src="{{ pod.image.url }}" alt="{{ pod.name }}">
+          {% else %}
+            <img src="https://via.placeholder.com/600x300?text=Fish+Pod" alt="No Image">
+          {% endif %}
+          <h4>{{ pod.name }}</h4>
+          <p>{{ pod.description|truncatewords:25 }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="no-data">
+      <p>No fish pod information available at this time.</p>
+    </div>
+  {% endif %}
+</div>
+
+<!-- AOS Animation Script -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+</script>
+{% endblock %}
